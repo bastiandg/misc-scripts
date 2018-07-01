@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-threshold="5"
-period="5"
+threshold="20"
+period="120"
 keepimages="10"
 IMAGEDIR="$(mktemp -d)"
 URL="$1"
