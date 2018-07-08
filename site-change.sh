@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-threshold="20"
+threshold="10"
 period="120"
 keepimages="10"
 IMAGEDIR="$(mktemp -d)"
 URL="$1"
+MAILADDRESS="$2"
 RESOLUTION="1024x768"
 
 cleanup () {
@@ -23,12 +24,13 @@ download_image () {
 			--rm \
 			-v "$IMAGEDIR:/screenshots" \
 			alekzonder/puppeteer:latest \
-			screenshot_series "$URL" "$RESOLUTION" > /dev/null
+			screenshot_series "$URL" "$RESOLUTION" 1000 > /dev/null
 }
 
 trigger () {
 	# Insert the required trigger here
 	echo "trigger imagediff: $imagediff"
+	mpack -s "$imagediff $URL changed " "$(ls -1t -- "$IMAGEDIR"/*.png | head -1)" "$MAILADDRESS"
 }
 
 requirements () {
@@ -51,7 +53,7 @@ sleep "$period"
 
 while true ; do
 	download_image
-	imagediff="$(compare_images $(ls -1t -- *.png | head -2))"
+	imagediff="$(compare_images $(ls -1t -- "$IMAGEDIR"/*.png | head -2))"
 	if [ "$imagediff" -gt "$threshold" ] ; then
 		trigger "$imagediff"
 	fi

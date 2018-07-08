@@ -1,0 +1,9 @@
+[Unit]
+Description=tesseract ocr
+
+[Service]
+User=scan
+ExecStart=/usr/local/bin/ocr.sh
+
+[Install]
+WantedBy=multi-user.target
