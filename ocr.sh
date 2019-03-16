@@ -20,9 +20,10 @@ while true ; do
 	output_filename="$OUTPUTPREFIX$(date "+%Y-%m-%d_%H-%M")"
 	docker run --rm -v "$(pwd):/home/work" "$TESSERACTIMAGE" \
 		tesseract rawfiles \
-		-l "$SCANLANG" \
 		"$output_filename" \
+		-l "$SCANLANG" \
 		pdf
 	mv "${output_filename}.pdf" "$OUTPUTDIR/"
+	chmod 777 "${OUTPUTDIR}/${output_filename}.pdf"
 	rm -f -- *
 done
