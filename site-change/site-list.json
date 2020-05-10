@@ -1,0 +1,17 @@
+{
+  "mails": [
+    "example@example.com"
+  ],
+  "sites": [
+    {
+      "name": "reddit",
+      "site": "https://reddit.com/r/random",
+      "contact": "https://www.reddit.com/contact/"
+    },
+    {
+      "name": "ipsum",
+      "site": "https://picsum.photos/800/800",
+      "contact": "https://github.com/DMarby/picsum-photos/issues"
+    }
+  ]
+}

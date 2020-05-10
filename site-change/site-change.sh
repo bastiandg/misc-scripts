@@ -5,7 +5,9 @@ period="120"
 keepimages="10"
 IMAGEDIR="$(mktemp -d)"
 URL="$1"
-MAILADDRESS="$2"
+SITENAME="$2"
+MESSAGE="$3"
+MAILADDRESS="$4"
 RESOLUTION="1024x768"
 
 cleanup () {
@@ -30,7 +32,7 @@ download_image () {
 trigger () {
 	# Insert the required trigger here
 	echo "trigger imagediff: $imagediff"
-	mpack -s "$imagediff $URL changed " "$(ls -1t -- "$IMAGEDIR"/*.png | head -1)" "$MAILADDRESS"
+	echo "$MESSAGE" |  mpack -s "$imagediff $SITENAME changed " -d /dev/stdin "$(ls -1t -- "$IMAGEDIR"/*.png | head -1)" "$MAILADDRESS"
 }
 
 requirements () {
