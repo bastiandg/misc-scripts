@@ -32,7 +32,7 @@ download_image () {
 trigger () {
 	# Insert the required trigger here
 	echo "trigger imagediff: $imagediff"
-	echo "$MESSAGE" |  mpack -s "$imagediff $SITENAME changed " -d /dev/stdin "$(ls -1t -- "$IMAGEDIR"/*.png | head -1)" "$MAILADDRESS"
+	echo "$MESSAGE" |  mpack -s "$imagediff $SITENAME changed " -d /dev/stdin "$(ls -1t -- "$IMAGEDIR"/*.png | head -1)" $MAILADDRESS
 }
 
 requirements () {
