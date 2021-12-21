@@ -1,0 +1,26 @@
+% change background color for inline code in
+% markdown files. The following code does not work well for
+% long text as the text will exceed the page boundary
+\definecolor{bgcolor}{HTML}{E0E0E0}
+\let\oldtexttt\texttt
+
+\renewcommand{\texttt}[1]{
+  \colorbox{bgcolor}{\oldtexttt{#1}}
+}
+
+% Font config
+\usepackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault}
+% Main font
+\usepackage[scaled]{berasans}
+% Font for code blocks
+\usepackage{sourcecodepro}
+
+% Header / footer config
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LO,LE]{\includegraphics[width=1cm]{logo}}
+\fancyhead[CO,CE]{header}
+\fancyfoot[CO,CE]{footer}
+\fancyfoot[LE,RO]{\thepage}
